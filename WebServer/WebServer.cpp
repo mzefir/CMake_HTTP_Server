@@ -2,15 +2,13 @@
 //
 
 #include "WebServer.h"
-#include "Networking/inc/SimpleSocket.h"
+#include "Networking/SimpleSocket.hpp"
 
 using namespace std;
 
 int main()
 {
 	cout << "Hello CMake." << endl;
-	SimpleSocket a;
-	a.a = 5;
 	
 	return 0;
 }

@@ -10,9 +10,16 @@
 
 namespace CW::Networking
 {
+	enum class AddressFamily;
+
 	class SimpleSocket {
-		int Connection;
+	protected:
+		sockaddr_in Address;
+		int Connection = 0;
+		SOCKET Socket;
 	public:
-		explicit SimpleSocket(int domain, int service, int protocol);
+		explicit SimpleSocket(AddressFamily family, int service, int protocol, unsigned short port, u_long ip);
+		virtual void EstablishConnection() = 0;
+		bool IsConnected() const;
 	};
 }

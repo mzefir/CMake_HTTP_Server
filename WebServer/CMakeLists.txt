@@ -21,10 +21,16 @@ include_directories(
 add_executable (WebServer 
 	"WebServer.cpp" 
 	"WebServer.h" 
-	"include/Networking/SimpleSocket.hpp"
-	"src/Networking/SimpleSocket.cc"
+	"include/Networking/SimpleSocket.hpp" "src/Networking/SimpleSocket.cc"
+	"include/Networking/AddressFamily.hpp" 
+	"include/Networking/BindingSocket.hpp" "src/Networking/BindingSocket.cc"
 	)
 
+if (WIN32)
+	target_link_libraries(WebServer ws2_32.lib)
+#    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+#    set(BUILD_SHARED_LIBS TRUE)
+endif()
 
 
 # Test area

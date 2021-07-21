@@ -2,8 +2,17 @@
 
 namespace CW::Networking
 {
-	SimpleSocket::SimpleSocket(int domain, int service, int protocol)
+	SimpleSocket::SimpleSocket(AddressFamily family, int service, int protocol, unsigned short port, u_long ip)
 	{
-		this->Connection = socket(domain, service, protocol);
+		this->Address.sin_family = static_cast<ADDRESS_FAMILY>(family);
+		this->Address.sin_port = htons(port);
+		this->Address.sin_addr.S_un.S_addr = htonl(ip);
+
+		this->Socket = socket(static_cast<int>(family), service, protocol);
+	}
+
+	bool SimpleSocket::IsConnected() const
+	{
+		return this->Connection > 0;
 	}
 }
