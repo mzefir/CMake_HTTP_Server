@@ -1,3 +1,5 @@
+#pragma once
+
 #ifdef WIN32
 #include <WinSock2.h>
 #else
@@ -5,7 +7,7 @@
 #include <netinet/in.h>
 #endif // WIN32
 
-namespace CW::Networking
+namespace CW::Networking::Sockets
 {
 	// todo: add rest of AF_*
 	enum class AddressFamily {

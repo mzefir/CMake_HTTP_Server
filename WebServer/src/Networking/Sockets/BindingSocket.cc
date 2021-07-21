@@ -1,6 +1,6 @@
-#include "Networking/BindingSocket.hpp"
+#include "Networking/Sockets/BindingSocket.hpp"
 
-namespace CW::Networking
+namespace CW::Networking::Sockets
 {
 
 	BindingSocket::BindingSocket(AddressFamily family, int service, int protocol, unsigned short port, u_long ip)
@@ -10,7 +10,8 @@ namespace CW::Networking
 
 	void BindingSocket::EstablishConnection()
 	{
-		this->Connection = bind(this->Socket, (sockaddr *)&this->Address, sizeof(this->Address));
+		int success = bind(this->Socket, (sockaddr *)&this->Address, sizeof(this->Address));
+		// 0 success, -1 fail
 	}
 
 }

@@ -3,15 +3,17 @@
 #ifdef WIN32
 #include <WinSock2.h>
 #else
+#define SOCKET int
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #endif // WIN32
 
+#include "Networking/Sockets/AddressFamily.hpp"
 
-namespace CW::Networking
+
+namespace CW::Networking::Sockets
 {
-	enum class AddressFamily;
-
 	class SimpleSocket {
 	protected:
 		sockaddr_in Address;

@@ -1,7 +1,4 @@
-﻿# CMakeList.txt : CMake project for WebServer, include source and define
-# project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
 set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
@@ -17,23 +14,29 @@ include_directories(
 	"include"
 )
 
-# Add source to this project's executable.
+# main executable
 add_executable (WebServer 
 	"WebServer.cpp" 
 	"WebServer.h" 
-	"include/Networking/SimpleSocket.hpp" "src/Networking/SimpleSocket.cc"
-	"include/Networking/AddressFamily.hpp" 
-	"include/Networking/BindingSocket.hpp" "src/Networking/BindingSocket.cc"
-	)
+
+# Networking/Sockets
+	"include/Networking/Sockets.hpp"
+	"include/Networking/Sockets/AddressFamily.hpp" 
+	"include/Networking/Sockets/BindingSocket.hpp" 		"src/Networking/Sockets/BindingSocket.cc"
+	"include/Networking/Sockets/ClientSocket.hpp" 		"src/Networking/Sockets/ClientSocket.cc"
+	"include/Networking/Sockets/ListeningSocket.hpp" 	"src/Networking/Sockets/ListeningSocket.cc"
+	"include/Networking/Sockets/SimpleSocket.hpp" 		"src/Networking/Sockets/SimpleSocket.cc"
+
+# Global includes
+	"include/Networking.hpp"
+)
+
 
 if (WIN32)
 	target_link_libraries(WebServer ws2_32.lib)
-#    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
-#    set(BUILD_SHARED_LIBS TRUE)
 endif()
 
-
-# Test area
+# Test area (mostly to do)
 add_executable (hello_test "hello_test.cc")
 
 target_link_libraries(
@@ -42,6 +45,3 @@ target_link_libraries(
 )
 include(GoogleTest)
 gtest_discover_tests(hello_test)
-
-
-# TODO: Add tests and install targets if needed.
